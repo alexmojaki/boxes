@@ -4,10 +4,10 @@ import alex.mojaki.boxes.PowerBox;
 
 /**
  * Throws an {@code IllegalArgumentException} when the value changes to {@code null}.
- * <p/>
+ * <p>
  * Note that all boxes start with a null value, and adding this does not affect that. It will only throw an exception
  * when you explicitly set null as the value.
- * <p/>
+ * <p>
  * You can't create a new instance of this class. Use the public constant {@code I}, or {@code INSTANCE} if you prefer.
  */
 public class ThrowOnNull implements ChangeObserver {

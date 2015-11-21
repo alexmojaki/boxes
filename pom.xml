@@ -91,6 +91,7 @@
                 <version>2.10.3</version>
                 <configuration>
                     <reportOutputDirectory>javadoc</reportOutputDirectory>
+                    <quiet>true</quiet>
                 </configuration>
                 <executions>
                     <execution>

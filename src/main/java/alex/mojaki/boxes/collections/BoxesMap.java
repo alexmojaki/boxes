@@ -10,13 +10,13 @@ import static alex.mojaki.boxes.Boxes.box;
  * A map where all the values are contained in boxes, and changes in the boxes are reflected in the map and vice versa.
  * That is, if you call {@code map.putBox(key, box)}, then {@code map.put(key, value)} will always be equivalent to
  * {@code box.set(value)}, and {@code map.get(key)} is the same as {@code box.get()}.
- * <p/>
+ * <p>
  * By default new boxes must be added via {@link BoxesMap#putBox(Object, Box)}. If you try to {@code put} a key that
  * has no corresponding box, this will throw an exception. There is a boolean box {@code allowsBoxlessKeys} that
  * determines this behaviour. By default it is false. If set to true (you can do this with the chaining method
  * {@code allowBoxlessKeys()}) then you can put any key, and new boxes will be created for unrecognised keys.
  * You can retrieve the box associated with a key using {@link BoxesMap#getBox(Object)}.
- * <p/>
+ * <p>
  * The map is backed by a {@code HashMap}, and is not thread-safe.
  */
 public class BoxesMap<K, V> extends AbstractMap<K, V> {

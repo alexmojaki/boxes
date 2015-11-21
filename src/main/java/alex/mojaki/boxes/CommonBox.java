@@ -3,7 +3,7 @@ package alex.mojaki.boxes;
 /**
  * The simplest concrete implementation of {@link PowerBox}.
  * You can also create one using {@link Boxes#box(BoxFamily)} or {@link Boxes#box(Class, String)}.
- * <p/>
+ * <p>
  * If you're willing to add some boilerplate to your code to save memory, see the parent {@link DefaultPowerBox}.
  */
 public class CommonBox<T> extends DefaultPowerBox<T> {

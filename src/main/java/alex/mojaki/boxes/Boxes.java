@@ -2,19 +2,19 @@ package alex.mojaki.boxes;
 
 /**
  * Container for static factory methods producing boxes of various kinds.
- * <p/>
+ * <p>
  * The various {@code box} methods are just intended to be more convenient than their corresponding constructors,
  * especially in Java 6 which doesn't have the diamond operator. The disadvantage is that type inference doesn't
  * work anymore if you try chaining, i.e. this will work:
- * <p/>
+ * <p>
  * {@code PowerBox<Integer> x = box(Example.class, "x");}
- * <p/>
+ * <p>
  * but this won't:
- * <p/>
+ * <p>
  * {@code PowerBox<Integer> x = box(Example.class, "x").addChangeObserver(ChangePrinter.I);}
- * <p/>
+ * <p>
  * so you'll have to resort to:
- * <p/>
+ * <p>
  * {@code PowerBox<Integer> x = new CommonBox<>(Example.class, "x").addChangeObserver(ChangePrinter.I);}
  */
 public enum Boxes {
@@ -67,11 +67,11 @@ public enum Boxes {
     /**
      * Return a {@code PowerBox} with the given family that forwards {@code get} and {@code set} to the
      * given box.
-     * <p/>
+     * <p>
      * The return value is meant to replace the box argument by direct reassignment, i.e.
-     * <p/>
+     * <p>
      * {@code exampleObject.boxField = Boxes.upgrade(family, exampleObject.boxField);}
-     * <p/>
+     * <p>
      * This essentially makes it possible for a user to add observers and middleware to a plain {@code Box}.
      * However they may be bypassed if a reference to the original box has been held elsewhere.
      */
@@ -82,11 +82,11 @@ public enum Boxes {
     /**
      * Return a {@code PowerBox} with a family identified by the given class and name that forwards
      * {@code get} and {@code set} to the given box.
-     * <p/>
+     * <p>
      * The return value is meant to replace the box argument by direct reassignment, i.e.
-     * <p/>
+     * <p>
      * {@code exampleObject.boxField = Boxes.upgrade(family, exampleObject.boxField);}
-     * <p/>
+     * <p>
      * This essentially makes it possible for a user to add observers and middleware to a plain {@code Box}.
      * However they may be bypassed if a reference to the original box has been held elsewhere.
      */

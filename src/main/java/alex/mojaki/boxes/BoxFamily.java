@@ -17,22 +17,22 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * This class holds metadata for a group of {@code PowerBox}es, including middleware and observers.
  * Boxes which return the same value from {@link PowerBox#getFamily()} are said to belong to the
  * same family and share all this metadata.
- * <p/>
+ * <p>
  * Here is an example of declaring a box and its family:
- * <p/>
+ * <p>
  * <pre>{@code
  * class MyClass {
  *     public static final BoxFamily myFieldFamily = BoxFamily.getInstance(MyClass.class, "myField");
  *     PowerBox<Integer> myField = box(myFieldFamily);
  * }
  * }</pre>
- * <p/>
+ * <p>
  * This is equivalent to:
- * <p/>
+ * <p>
  * <pre>{@code
  *     PowerBox<Integer> myField = box(MyClass.class, "myField");
  * }</pre>
- * <p/>
+ * <p>
  * which is more concise but less efficient as the family has to be looked up.
  */
 public class BoxFamily {
@@ -168,7 +168,7 @@ public class BoxFamily {
 
     /**
      * A simple human readable description of the boxes belonging to this family, equal to:
-     * <p/>
+     * <p>
      * {@code getDeclaringClass().getSimpleName() + "." + getName()}
      */
     public String description() {
@@ -182,7 +182,7 @@ public class BoxFamily {
 
     /**
      * Return whether boxes in this family should show the string representations of their values in
-     * {@link PowerBox#toString()} and in exception messages. By default this returns {@code true}.
+     * {@code toString()} and in exception messages. By default this returns {@code true}.
      * If {@link BoxFamily#hideValueStrings()} has been called it returns {@code false}.
      */
     public boolean showsValueStrings() {
@@ -191,7 +191,7 @@ public class BoxFamily {
 
     /**
      * Prevent boxes in this family from showing the string representations of their values in
-     * {@link PowerBox#toString()} and in exception messages. This is to avoid leaking sensitive data in logs
+     * {@code toString()} and in exception messages. This is to avoid leaking sensitive data in logs
      * or computing expensive string representations. It is still possible to explicitly
      * obtain the string representation if desired.
      *
@@ -236,9 +236,9 @@ public class BoxFamily {
 
         /**
          * Clear this list and prevent any further modifications to it. For example:
-         * <p/>
+         * <p>
          * {@code box.getFamily().getChangeMiddlewares().disable();}
-         * <p/>
+         * <p>
          * means that {@code ChangeMiddleware} can't be used on boxes in this family.
          */
         public void disable() {

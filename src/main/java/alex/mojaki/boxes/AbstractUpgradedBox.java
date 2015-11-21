@@ -5,7 +5,7 @@ package alex.mojaki.boxes;
  * calls to it. This allows you to add observers and middleware to a box that doesn't have this functionality
  * explicitly enabled. However this may not have the desired results if a reference to the original box is held
  * elsewhere.
- * <p/>
+ * <p>
  * This class is abstract because it doesn't implement {@link PowerBox#getFamily()}. It is the analog of
  * {@link DefaultPowerBox} - you can subclass it to reduce memory usage by storing the family as a static field.
  * If you are not looking to optimise performance, stick to {@link CommonUpgradedBox}.

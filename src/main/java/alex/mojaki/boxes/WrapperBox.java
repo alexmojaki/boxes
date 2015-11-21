@@ -12,11 +12,11 @@ import java.util.Objects;
 /**
  * A box which implements the same interface as the type of the value it contains and notifies its {@link ChangeObserver}s
  * when it is mutated via the {@link WrapperBox#change()} method.
- * <p/>
+ * <p>
  * This class does not enforce this description, but provides the machinery to do so easily, and you should
  * subclass it with this intent. The source of {@link MapBox} is a good example of how this is done. Here are the steps
  * to follow to create your own:
- * <p/>
+ * <p>
  * <ol>
  * <li>Ensure that the type you want to wrap exists as an interface and that code typically uses that interface
  * as a type instead of an implementing class. If implementations override {@code equals}, it should be possible for them
@@ -25,6 +25,7 @@ import java.util.Objects;
  * <li>Create a class that extends {@code WrapperBox<T>} and implements {@code T}, where {@code T} is your interface.</li>
  * <li>Implement the methods of your interface by forwarding method calls to the field {@code value}, e.g.
  * {@code @Override public int size() { return value.size(); }}.</li>
+ * <li>
  * <ul>
  * <li>If the method might cause the value to change, call the {@link WrapperBox#change()} method afterwards,
  * e.g. {@code void clear() { value.clear(); change(); }}.</li>
@@ -36,13 +37,14 @@ import java.util.Objects;
  * similar way. See the source of {@link CollectionBox#iterator()} and {@link ListBox#subList(int, int)}
  * for examples.</li>
  * </ul>
+ * </li>
  * <li>Override {@link WrapperBox#get()} to just "{@code return this;}".</li>
  * </ol>
- * <p/>
+ * <p>
  * This class should not allow users to access the underlying value or they could change it without notifying observers.
  * This is why {@code get()} returns the object itself (by you overriding it as such). Because of this it doesn't make
  * sense to add {@code GetObserver} or {@code GetMiddleware}, so these are disabled.
- * <p/>
+ * <p>
  * Note that when you set a new value on a {@code PowerBox}, it will revert to the original value if an exception occurs
  * in the middleware or observers, but no such rollback will occur here if there is an exception thrown by an observer
  * after the value changes internally.

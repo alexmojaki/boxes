@@ -5,37 +5,36 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-// @formatter:off
 /**
  * A helper class for caching instances of objects based on constructor arguments in a thread-safe manner.
- *
+ * <p>
  * Override the {@link InstanceStore#getNew(Object...)} method to create a new instance, typically by calling a
  * constructor. Then then {@link InstanceStore#get(Object...)} method will only return a new instance when it
  * encounters new arguments. Otherwise it will return a previously created instance.
- *
+ * <p>
  * Usage of this class will look something like this:
- * <pre>{@code
-public class T {
-
-    private static final InstanceStore<T> INSTANCE_STORE = new InstanceStore<T>() {
-        @Override
-        public T getNew(Object... args) {
-            return new T((X) args[0], (Y) args[1]);
-        }
-    };
-
-    private T(X x, Y y) {
-        // constructor here...
-    }
-
-    public static T getInstance(X x, Y y) {
-        return INSTANCE_STORE.get(x, y);
-    }
-}
+ * <pre>
+ * {@code
+ * public class T {
+ *
+ *     private static final InstanceStore<T> INSTANCE_STORE = new InstanceStore<T>() {
+ *         public T getNew(Object... args) {
+ *             return new T((X) args[0], (Y) args[1]);
+ *         }
+ *     };
+ *
+ *     private T(X x, Y y) {
+ *         // constructor here...
+ *     }
+ *
+ *     public static T getInstance(X x, Y y) {
+ *         return INSTANCE_STORE.get(x, y);
+ *     }
+ * }
  * }</pre>
+ *
  * @param <T> the type of class being stored
  */
-// @formatter:on
 public abstract class InstanceStore<T> {
 
     private final ConcurrentMap<List<Object>, T> map = new ConcurrentHashMap<List<Object>, T>();

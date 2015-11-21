@@ -10,7 +10,7 @@ import static alex.mojaki.boxes.utils.Utils.lessThan;
  * If the value is beyond the given bounds, or if it is equal to a bound that is not inclusive
  * throw an {@code IllegalArgumentException}.
  * For example:
- * <p/>
+ * <p>
  * <pre>{@code
  * PowerBox<Double> ratio = new CommonBox<>(Example.class, "ratio")
  *         .addChangeObserver(RequireBounds.between(0.0, false, 1.0, true));
@@ -25,7 +25,7 @@ import static alex.mojaki.boxes.utils.Utils.lessThan;
  * ratio.set(5.0);
  * ratio.set(0.0);  // lower bound is exclusive
  * }</pre>
- * <p/>
+ * <p>
  * You can specify two bounds with {@code between}, or a single bound with {@code minimum} or {@code maximum}.
  */
 public class RequireBounds<T> implements ChangeObserver<Comparable<T>> {

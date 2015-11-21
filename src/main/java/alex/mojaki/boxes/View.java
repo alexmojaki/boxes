@@ -11,11 +11,11 @@ import alex.mojaki.boxes.observers.get.GetObserver;
  * A {@link PowerBox} whose value is calculated based on the values of other {@code PowerBox}es and knows when those
  * boxes change, allowing it to safely cache its own value to save computation and notify {@link ChangeObserver}s
  * that the result of its calculation is now different.
- * <p/>
+ * <p>
  * Note that views have some base performance overhead and writing your code to use a view for caching wherever
  * possible will not necessarily speed up your program - it may even slow it down. You should use views for caching
  * only when the computation is slow or expensive.
- * <p/>
+ * <p>
  * The {@link PowerBox#set(Object)} method and the use of {@link ChangeMiddleware} are unsupported.
  *
  * @param <T> the type of the calculated value
@@ -110,7 +110,7 @@ public abstract class View<T> extends CommonBox<T> {
      *         by being a {@link WrapperBox}.</li>
      *     </ol></li>
      * </ol>
-     * <p/>
+     * <p>
      * When {@link PowerBox#get()} is called, {@code calculate()} will be called only if a box has changed its value
      * since the previous call to {@code calculate()}. In addition, if the view has any {@code ChangeObserver}s added,
      * {@code calculate()} is called every time one of the boxes changes, i.e. the value of view might change.
