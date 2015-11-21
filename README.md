@@ -1,5 +1,7 @@
 # Boxes
 
+[![Join the chat at https://gitter.im/alexmojaki/boxes](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/alexmojaki/boxes?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 * [Introduction](#introduction)
 * [Boxes in more detail](#boxes-in-more-detail)
   * [Plain Boxes](#plain-boxes)
