@@ -17,6 +17,8 @@
 * [Exceptions and errors](#exceptions-and-errors)
 * [String values of boxes](#string-values-of-boxes)
 
+* [Javadocs](http://alexmojaki.github.io/boxes/javadoc/apidocs/index.html)
+
 
 ## Introduction
 
