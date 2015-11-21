@@ -21,28 +21,28 @@ public enum Boxes {
     ;
 
     /**
-     * Return a simple box with initial value null.
+     * Return a new {@link BasicBox} with initial value null.
      */
     public static <T> Box<T> box() {
         return new BasicBox<T>();
     }
 
     /**
-     * Return a simple box with the given initial value.
+     * Return a new {@link BasicBox} with the given initial value.
      */
     public static <T> Box<T> box(T initialValue) {
         return new BasicBox<T>(initialValue);
     }
 
     /**
-     * Return a simple {@code PowerBox} belonging to the family identified by the given class and name.
+     * Return a new {@link CommonBox} belonging to the family identified by the given class and name.
      */
     public static <T> PowerBox<T> box(Class<?> clazz, String name) {
         return new CommonBox<T>(clazz, name);
     }
 
     /**
-     * Return a simple {@code PowerBox} belonging to the given family.
+     * Return a new {@link CommonBox} belonging to the given family.
      */
     public static <T> PowerBox<T> box(BoxFamily family) {
         return new CommonBox<T>(family);
