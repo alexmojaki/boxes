@@ -4,6 +4,7 @@
 
 
 * [Introduction](#introduction)
+* [Setup](#setup)
 * [Boxes in more detail](#boxes-in-more-detail)
   * [Plain Boxes](#plain-boxes)
   * [PowerBoxes](#powerboxes)
@@ -113,6 +114,16 @@ A special kind of `PowerBox` is a `View`. This doesn't correspond to a tradition
 Another possibility is that computing the `View` is very expensive and you only want to calculate it as often as strictly necessary. You can then ask the view to cache its value, and if between calls to `get` on the view the boxes don't change, the calculation won't happen again.
 
 What if the values within the boxes are mutable, so that their contents can change without any call to `set`? It is still possible under some circumstances to watch the boxes for changes by creating a `WrapperBox`. This is a `PowerBox` which implements the same interface as the value it contains and can watch for all calls to mutating methods. The library provides the classes `ListBox`, `SetBox`, and `MapBox` ready to use. This way you can safely create a `View` referring to a collection that knows when the collection changes in any way.
+
+## Setup
+
+For maven projects, in your `pom.xml`:
+
+    <dependency>
+      <groupId>com.github.alexmojaki</groupId>
+      <artifactId>boxes</artifactId>
+      <version>0.1</version>
+    </dependency>
 
 ## Boxes in more detail
 
