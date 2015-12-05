@@ -155,15 +155,17 @@ Here is an example of using `PowerBox`es with observers in a class:
 ```
 public class Person extends CaseClass {
 
-    public PowerBox<String> firstName = new CommonBox<>(Person.class, "firstName").notNull();
-    public PowerBox<String> lastName = new CommonBox<>(Person.class, "lastName").notNull();
-    public PowerBox<Integer> age = new CommonBox<>(Person.class, "age")
+    public final PowerBox<String> firstName = new CommonBox<>(Person.class, "firstName").notNull();
+    public final PowerBox<String> lastName = new CommonBox<>(Person.class, "lastName").notNull();
+    public final PowerBox<Integer> age = new CommonBox<>(Person.class, "age")
             .addChangeObserver(ThrowOnNull.I, RequireBounds.minimum(0, true));
 
 }
 ```
 
 The box `age` has two `ChangeObservers` attached to it. The first ensures that `set` is not called with `null` as an argument. The seconds ensures that `set` is called with a number that is at least 0 (the `true` means 'inclusive'). Both will throw an `IllegalArgumentException` with an informative message if their conditions are not met, and the box will keep its previous value. The two observers can be added in a single method call since all the `add*` methods take variable arguments. The method can also be called directly on the constructor since it returns the box itself, allowing method chaining. Overall you have a nice concise, declarative description of the fields in your class. There is just one instance of the `ThrowOnNull` observer, named `I` for minimal clutter. Using it is so common that there is a special method just for adding it called `notNull`, which you can see in the first two boxes.
+
+Note that the boxes are declared as final. There is no reason to let anyone reassign a `PowerBox` as there is no more incentive such as upgrading, and if the box is replaced then middleware and observers are no longer applied.
 
 ### Views
 
@@ -174,8 +176,8 @@ For example, suppose you're given the following class:
 ```
 class Rectangle {
 
-    public PowerBox<Integer> width = box(Rectangle.class, "width");
-    public PowerBox<Integer> height = box(Rectangle.class, "height");
+    public final PowerBox<Integer> width = box(Rectangle.class, "width");
+    public final PowerBox<Integer> height = box(Rectangle.class, "height");
 
 }
 ```
@@ -231,8 +233,8 @@ A `WrapperBox` is a special `CommonBox` which implements the same interface as t
 If you want to use a box but you don't want users of your external API to be able to `set` its value, you can do this:
 
 ```
-private PowerBox<Integer> _id = box(Thing.class, "id");
-public PowerBox<Integer> id = Boxes.unsettableAdapter(_id);
+private final PowerBox<Integer> _id = box(Thing.class, "id");
+public final PowerBox<Integer> id = Boxes.unsettableAdapter(_id);
 ```
 
 The adapter delegates all methods except `set`, which will throw an exception. Now users can `get` the value, add observers, etc. without accidentally breaking anything.
@@ -275,20 +277,20 @@ Remember that middleware and observers are shared by all boxes in the same famil
 
 The boxes API is designed to be quick and easy while your classes are new and may change soon, while also allowing you to make them more efficient if you're willing to write some boilerplate. Suppose you have a box like this:
 
-    public PowerBox<String> someField = new CommonBox<>(Example.class, "someField")
+    public final PowerBox<String> someField = new CommonBox<>(Example.class, "someField")
         .addChangeObserver(SomeChangeObserver.getInstance(argument));
 
 There are a couple of inefficiencies here. The first is that every time this box is constructed for a new instance of your overall class, it uses the class and name parameters to look up its family in a map. Instead you can create the family once yourself as a static field and pass it directly:
 
     private static final BoxFamily someFieldFamily = BoxFamily.getInstance(Example.class, "someField");
-    public PowerBox<String> someField = new CommonBox<>(someFieldFamily)
+    public final PowerBox<String> someField = new CommonBox<>(someFieldFamily)
             .addChangeObserver(SomeChangeObserver.getInstance(argument));
 
 The next step is very simple: add observers and middleware directly to the family instead of the box.
 
     private static final BoxFamily someFieldFamily = BoxFamily.getInstance(Example.class, "someField")
             .addChangeObserver(SomeChangeObserver.getInstance(argument));
-    public PowerBox<String> someField = new CommonBox<>(someFieldFamily);
+    public final PowerBox<String> someField = new CommonBox<>(someFieldFamily);
 
 These two steps reduce the time taken to create a box. If you want to decrease the amount of memory each box uses, create a nested class (static if possible) extending `DefaultPowerBox`. This is the parent of `CommonBox` and it doesn't have a field to store the `BoxFamily` (hence the reduced memory usage), so you have to tell it how to obtain it:
 
@@ -298,7 +300,7 @@ These two steps reduce the time taken to create a box. If you want to decrease t
             return someFieldFamily;
         }
     }
-    public PowerBox<String> someField = new SomeField();
+    public final PowerBox<String> someField = new SomeField();
 
 And that's it! It's ugly, but it's easy, and really you shouldn't need to do it often anyway.
 
